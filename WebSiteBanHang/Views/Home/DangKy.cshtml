@@ -1,0 +1,62 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@using CaptchaMvc;
+
+@using WebSiteBanHang.Models
+@model ThanhVien
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+
+
+<div class=" container">
+    <div class=" register">
+        @using (Html.BeginForm())
+        {
+            <div class="col-md-6 register-top-grid">
+                <h3>ĐĂNG KÝ</h3>
+                <div>
+                    <span>Tài Khoản</span>
+                    @Html.TextBox("TaiKhoan")
+                </div>
+                <div>
+                    <span>Họ Tên</span>
+                    @Html.TextBox("HoTen")
+                </div>
+                <div>
+                    <span>Địa chỉ</span>
+                    @Html.TextBox("DiaChi")
+                </div>
+                <div>
+                    <span>Email </span>
+                    @Html.TextBox("Email")
+                </div>
+
+                <a class="news-letter" href="#">
+                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up for Newsletter</label>
+                </a>
+            </div>
+            <div class="col-md-6 register-bottom-grid">
+                <h3>Thông Tin Đăng Nhập</h3>
+                <div>
+                    <span>Mật Khẩu</span>
+                    @Html.Password("MatKhau")
+                </div>
+                <div>
+                    <span>Xác Minh Mật Khẩu</span>
+                    @Html.Password("NhapLaiMatKhau")
+                </div>
+
+                <div>
+                    @Html.MathCaptcha()
+                </div>
+
+                <input type="submit" value="Xác nhận">
+
+            </div>
+            <div class="clearfix"> </div>
+        }
+    </div>
+</div>
+<h1 style="color:red;">@ViewBag.ThongBao</h1>

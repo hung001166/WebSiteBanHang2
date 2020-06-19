@@ -1,0 +1,70 @@
+﻿@using WebSiteBanHang.Models;
+@model DonDatHang
+
+@{
+    ViewBag.Title = "DuyetDonHang";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Thông tin đơn hàng của <font color="red"> @Model.KhachHang.TenKh</font></h2>
+<div class="ChiTietDonHang table">
+    @{IEnumerable<ChiTietDonDatHang> lstChiTietDH = (IEnumerable<ChiTietDonDatHang>)ViewBag.ListChiTietDH;}
+    <table class="table" id="table">
+        <tr>
+            <td colspan="4">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>Mã đơn hàng: <b style="color:red;">@Model.MaDDH</b></td>
+                        <td>Khách hàng: <b style="color:red;">@Model.KhachHang.MaKH - @Model.KhachHang.TenKh</b></td>
+                        <td>Ngày đặt: <b style="color:red;">@Model.NgayDat.Value.ToString("dd/MM/yyyy")</b></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Sản phẩm</td>
+            <td>Hình ảnh</td>
+            <td>Số lượng</td>
+            <td>Đơn giá</td>
+        </tr>
+
+        @foreach (var item in lstChiTietDH)
+        {
+            <tr>
+                <td>@item.SanPham.TenSP</td>
+                <td><img width="150" height="50" src="@Url.Content("~/Content/HinhAnhSP/"+ item.SanPham.HinhAnh)" /></td>
+                <td>@item.SoLuong</td>
+                <td>@item.DonGia</td>
+            </tr>
+        }
+        <tr>
+            <td align="right" colspan="4">Tổng Số Lượng: @Model.ChiTietDonDatHangs.Sum(n => n.SoLuong) sản phẩm</td>
+        </tr>
+        <tr>
+            <td align="right" colspan="4">Tổng Tiền: $@Model.ChiTietDonDatHangs.Sum(n => n.SanPham.DonGia)</td>
+        </tr>
+        <tr>
+            <td align="right" colspan="4">Địa Chỉ Giao Hàng: @Model.KhachHang.DiaChi</td>
+        </tr>
+    </table>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("MaDDH", Model.MaDDH);
+    <div class="form-horizontal">
+        <hr />
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Duyệt" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Trở về", "Index")
+</div>

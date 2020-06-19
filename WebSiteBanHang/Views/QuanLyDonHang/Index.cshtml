@@ -1,0 +1,35 @@
+﻿@using WebSiteBanHang.Models;
+@model IEnumerable<DonDatHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Đơn Hàng Chưa Duyệt</h2>
+
+<table class="table">
+    <tr>
+        <td>Mã đơn hàng</td>
+        <td>Ngày đặt</td>
+        <td> Khách hàng</td>
+        <td>Địa chỉ</td>
+        <td>SĐT</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.MaDDH</td>
+    <td>@item.NgayDat</td>
+    <td>@item.KhachHang.MaKH - @item.KhachHang.TenKh </td>
+    <td>@item.KhachHang.DiaChi</td>
+    <td>@item.KhachHang.SoDienThoai</td>
+    <td class="btn btn-info">
+        @Html.ActionLink("Duyệt", "DuyetDonHang", new { id = item.MaDDH })
+        @Html.ActionLink("Hủy", "HuyDonHang", new { id = item.MaDDH })
+    </td>
+</tr>
+    }
+</table>
+

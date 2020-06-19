@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Demo";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+<link href="~/Content/css/style_form_dangnhap.css" rel="stylesheet" type='text/css' />
+
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,800,400" rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Marvel:400,700' rel='stylesheet' type='text/css'>
+
+    <div style="height:500px;">
+        <br />
+        <input type="button" value="Đăng Nhập" id="btnDangNhap" class="btn btn-primary" />
+        @*tao 1 div ben ngoai chu login-form*@
+        <div id="popup_login">
+            @*form đăng nhập từ đây*@
+            <div class="login-form" id="login-form">
+                <div style="clear:both;text-align:right; margin-bottom  :0;">
+                    @*nút close form*@
+                    <span id="close-form" class="btn btn-danger">X</span>
+                </div>
+
+                <h2>Đăng Nhập</h2>
+                <div class="form-info">
+                    <form>
+                        <input type="text" class="email TaiKhoan" placeholder="Tên Đăng Nhập" required="" style="background-color:white;"/>
+                        <input type="password" class="password MatKhau" placeholder="Mật Khẩu" required="" style="background-color:white;"/>
+                        <p><a href="#">Quên mật khẩu?</a></p>
+                        <ul class="login-buttons">
+                            <li><input type="submit" value="LOGIN" id="btnDangNhap1"/></li>
+                            <li><a href="#" class="hvr-sweep-to-left">Register</a></li>
+                            <div class="clear"> </div>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        #btnDangNhap {
+            float: left;
+        }
+
+        .content {
+            height: 500px;
+        }
+
+        #close-form {
+            color: white;
+        }
+
+        #login-form {
+            background: #3a3a46;
+            cursor: pointer;
+        }
+
+        /*css cho div popup_login*/
+        #popup_login {
+            position: fixed;
+            background-color: rgba(0,0,0,.5);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            display: none;
+        }
+    </style>
+
+@*Sử dụng jquery trên popup đăng nhâp*@
+<script type="text/javascript">
+    //Hiển thị  
+    $("#btnDangNhap").click(function () {
+        $("#popup_login").show();
+    });
+
+    //Ẩn đi
+    $("#close-form").click(AnForm);
+    //Định nghĩa function ẩn form
+    function AnForm()
+    {
+        $("#popup_login").hide();
+    }
+
+    //Lấy giá trị từ textbox (ví dụ)
+    $("#btnDangNhap1").click(function () {
+        var TaiKhoan = $(".TaiKhoan").val();
+        var MatKhau = $(".MatKhau").val();
+
+        //alert("Tài Khoản:" + TaiKhoan + "\n Mật Khẩu:" + MatKhau);
+        if (TaiKhoan = "") {
+            alert("Lỗi cmnr!");
+            return;
+        }
+    });
+</script>
+

@@ -1,0 +1,130 @@
+﻿@using WebSiteBanHang.Models;
+
+@model List<ItemGioHang>
+
+@{
+    ViewBag.Title = "XemGioHang";
+
+}
+<h3>Giỏ hàng</h3>
+
+<script>
+    $("#btnDatHang").click(function () {
+        var loi = 0;
+        if ($("#TenKh").val()=="") {
+            $("#TB_TenKh").text("Tên Khách hàng không được bỏ trống!");
+            loi++;
+        }
+        else {
+            loi++;
+            $("#TB_TenKh").text("");
+        }
+
+        if ($("#DiaChi").val()=="")
+        {
+            $("#TB_DiaChi").text("Địa chỉ không được bỏ trống!");
+            loi++;
+        }
+        else {
+            loi++;
+            $("#TB_DiaChi").text("");
+        }
+    
+        if (loi != 0)
+        {
+            return false;//ngăn sự kiện submit đến server
+        } 
+    });
+</script>
+
+@if (Model == null || Model.Count == 0)
+{
+    <h2 style="color: #0094ff">Giỏ hàng rỗng!</h2>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <td>Mã SP</td>
+            <td>Tên SP</td>
+            <td>Hình Ảnh</td>
+            <td>Số Lượng</td>
+            <td>Đơn Giá</td>
+            <td>Thành Tiền</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaSP</td>
+                <td>@item.TenSP</td>
+                <td><img src="@Url.Content("~/Content/HinhAnhSP/" + item.HinhAnh)" width="50" height="50" /></td>
+                <td>@item.DonGia $</td>
+                <td>@item.SoLuong</td>
+                <td>@item.ThanhTien $</td>
+                <td>
+                    @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP })
+                    @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    using (Html.BeginForm("DatHang", "GioHang"))
+    {
+        if (Session["TaiKhoan"] == null)
+        {
+            <div class="ThongTinMuaHang">
+                <table align="center" class="table">
+                    <tr>
+                        <td align="center" colspan="2"><b>Thông Tin Khách Hàng</b></td>
+                    </tr>
+                    <tr>
+                        <td>Họ Tên</td>
+                        <td>
+                            <input id="TenKh" name="TenKh" type="text" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Địa Chỉ</td>
+                        <td>
+                           
+                           
+                            <textarea id="DiaChi" name="DiaChi" type="text" required> </textarea>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            <input id="Email" name="Email" type="text" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Điện thoại</td>
+                        <td>
+                            <input id="SoDienThoai" name="SoDienThoai" type="text" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.Hidden("MaThanhVien", 1)</td>
+                    </tr>
+                </table>
+
+            </div>
+        }
+
+        <div class="divDatHang" style="text-align:right;">
+            <input type="submit" value="Đặt hàng" class="btn btn-danger" id="btnDatHang" />
+            @Html.ActionLink("Mua tiếp", "Index", "Home", new { @class = "btn btn-success" })
+        </div>
+    }
+}
+
+    
+
+
+
+

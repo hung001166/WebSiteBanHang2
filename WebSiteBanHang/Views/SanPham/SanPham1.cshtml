@@ -1,0 +1,30 @@
+﻿@using WebSiteBanHang.Models;
+@{
+    ViewBag.Title = "SanPham1";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+@{
+    IEnumerable<SanPham> lstSP = (IEnumerable<SanPham>)ViewBag.ListSP;
+    IEnumerable<SanPham> lstDT = (IEnumerable<SanPham>)ViewBag.listDT;
+}
+
+
+@*Chèn paritalView vào 1 view *@
+<div class="container">
+    <div class="content-top">
+        <h1>Giày Nam</h1>
+        @*- Cách 1*@
+        @Html.Partial("SanPhamPartial", lstSP)
+    </div>
+</div>
+
+<div class="container">
+    <div class="content-top">
+        <h1>Giày Nữ</h1>
+        @*- Cách 1*@
+        @Html.Partial("SanPhamPartial", lstDT)
+    </div>
+</div>
+
+@* - Cách 2
+    @Html.Action("SanPhamPartial")*@

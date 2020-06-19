@@ -1,0 +1,35 @@
+﻿@using WebSiteBanHang.Models;
+@model IEnumerable<SanPham>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+    <table class="table">
+        <tr>
+            <td>Mã SP</td>
+            <td>Tên SP</td>
+            <td>SL tồn</td>
+            <td>Nhà cung cấp</td>
+            <td>Nhà Sản Xuất</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaSP</td>
+                <td>@item.TenSP</td>
+                <td style="color:red;">@item.SoLuongTon</td>
+                <td>@item.NhaCungCap.TenNCC</td>
+                <td>@item.NhaSanXuat.TenNSX </td>
+            </tr>
+        }
+    </table>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

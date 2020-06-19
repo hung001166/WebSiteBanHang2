@@ -1,0 +1,43 @@
+﻿@using WebSiteBanHang.Models;
+@model IEnumerable<SanPham>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Quản Lý Sản Phẩm</h2>
+</br>
+<a href="@Url.Action("TaoMoi","QuanLySanPham")"><input type="button" value="Thêm Sản Phẩm" class="btn btn-success" style="float: right;" /></a></br>
+<table class="table">
+    <tr>
+        <td>Mã SP</td>
+        <td>Tên SP</td>
+        <td>Đơn Giá</td>
+        <td>Mô tả</td>
+        <td>Hình Ảnh</td>
+        <td>SL tồn</td>
+        <td>Nhà cung cấp</td>
+        <td>Nhà Sản Xuất</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MaSP</td>
+            <td>@item.TenSP</td>
+            <td>$ @item.DonGia </td>
+            <td>@item.Mota</td>
+            <td><img src="@Url.Content("~/Content/HinhAnhSP/" + item.HinhAnh)" width="50" height="50" /></td>
+            <td>@item.SoLuongTon</td>
+            <td>@item.NhaCungCap.TenNCC</td>
+            <td>@item.NhaSanXuat.TenNSX </td>
+            <td class="btn btn-info">
+                @Html.ActionLink("Chỉnh Sửa", "ChinhSua", new { id = item.MaSP })
+                @Html.ActionLink("Xóa", "Xoa", new { id = item.MaSP })
+            </td>
+        </tr>
+    }
+</table>
+
