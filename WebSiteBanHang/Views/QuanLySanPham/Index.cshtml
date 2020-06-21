@@ -24,20 +24,25 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.MaSP</td>
-            <td>@item.TenSP</td>
-            <td>$ @item.DonGia </td>
-            <td>@item.Mota</td>
-            <td><img src="@Url.Content("~/Content/HinhAnhSP/" + item.HinhAnh)" width="50" height="50" /></td>
-            <td>@item.SoLuongTon</td>
-            <td>@item.NhaCungCap.TenNCC</td>
-            <td>@item.NhaSanXuat.TenNSX </td>
-            <td class="btn btn-info">
-                @Html.ActionLink("Chỉnh Sửa", "ChinhSua", new { id = item.MaSP })
-                @Html.ActionLink("Xóa", "Xoa", new { id = item.MaSP })
-            </td>
-        </tr>
+<tr>
+    <td>@item.MaSP</td>
+    <td>@item.TenSP</td>
+    <td>$ @item.DonGia </td>
+    <td>@Html.Raw(item.Mota)</td>
+    <td>
+        <img src="@Url.Content("~/Content/HinhAnhSP/" + item.HinhAnh)" width="50" height="50" alt="" />
+
+    </td>
+    <td>@item.SoLuongTon</td>
+    <td>@item.NhaCungCap.TenNCC</td>
+    <td>@item.NhaSanXuat.TenNSX </td>
+    <td class="btn btn-info">
+        @Html.ActionLink("Chỉnh Sửa", "ChinhSua", new { id = item.MaSP })
+    </td>
+    <td class="btn btn-info">
+        @Html.ActionLink("Xóa", "Xoa", new { id = item.MaSP })
+    </td>
+</tr>
     }
 </table>
 

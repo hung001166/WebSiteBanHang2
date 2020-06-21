@@ -8,16 +8,19 @@ using WebSiteBanHang.Models;
 
 namespace WebSiteBanHang.Controllers
 {
+    [Authorize(Roles = "QuanTri, QuanLySanPham")]
     public class QuanLySanPhamController : Controller
     {
         QuanLyBanHangEntities db = new QuanLyBanHangEntities();
         // GET: QuanLySanPham
+        [Authorize(Roles = "QuanLySanPham")]
         public ActionResult Index()
         {
 
             return View(db.SanPhams.Where(n=>n.DaXoa==0).OrderByDescending(n=>n.MaSP));
         }
 
+        [Authorize(Roles = "QuanLySanPham")]
         [HttpGet]
         public ActionResult TaoMoi()
         {
@@ -65,7 +68,8 @@ namespace WebSiteBanHang.Controllers
             return RedirectToAction("Index");
         }
 
-         [HttpGet]
+        [Authorize(Roles = "QuanLySanPham")]
+        [HttpGet]
          public ActionResult ChinhSua(int? id)
         {
             //Lấy sp cần chỉnh sửa dựa vào id
@@ -101,7 +105,7 @@ namespace WebSiteBanHang.Controllers
                 return RedirectToAction("Index");
         }
 
-
+        [Authorize(Roles = "QuanLySanPham")]
         [HttpGet]
         public ActionResult Xoa(int? id)
         {

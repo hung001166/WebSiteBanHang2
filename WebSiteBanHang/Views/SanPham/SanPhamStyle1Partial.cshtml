@@ -15,7 +15,7 @@
             </a>
 
 
-            <p><a href="single.html">@item.TenSP</a></p>
+            <p><a href="@Url.RouteUrl("XemChiTiet",new { @id=item.MaSP, @tensp=item.TenSP})">@item.TenSP</a></p>
         </div>
         }
         <div class="clearfix"></div>

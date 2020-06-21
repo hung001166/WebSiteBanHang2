@@ -89,7 +89,7 @@
 
             <h5 class="item_price">$@Model.DonGia</h5>
             <p>
-                @Model.Mota
+                @Html.Raw(Model.Mota)
             </p>
 
             <a href="@Url.Action("ThemGioHang","GioHang", new {@MaSP = Model.MaSP, @strURL = Request.Url.ToString() })" class="add-cart item_add">GIỎ HÀNG</a>

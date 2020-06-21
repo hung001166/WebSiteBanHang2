@@ -121,7 +121,7 @@ namespace WebSiteBanHang.Controllers
                         PhanQuyen(tv.TaiKhoan.ToString(), Quyen);
                         Session["TaiKhoan"] = tv;
 
-                        return Content("<script>window.location.reload();</script>");
+                        return RedirectToAction("Index");
                     }
                 }
 

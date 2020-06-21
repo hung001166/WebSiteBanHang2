@@ -7,6 +7,7 @@ using WebSiteBanHang.Models;
 
 namespace WebSiteBanHang.Controllers
 {
+    [Authorize(Roles = "QuanTri, QuanLyDonHang")]
     public class QuanLyDonHangController : Controller
     {
         QuanLyBanHangEntities db = new QuanLyBanHangEntities();
@@ -17,7 +18,7 @@ namespace WebSiteBanHang.Controllers
             return View(db.DonDatHangs.Where(n => n.TinhTrangGiaoHang == false && n.DaHuy == false).OrderByDescending(n => n.NgayDat));
         }
 
-
+        [Authorize(Roles = "QuanLyDonHang")]
         [HttpGet]
         public ActionResult DuyetDonHang(int? id)
         {
@@ -48,6 +49,7 @@ namespace WebSiteBanHang.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "QuanTri")]
         [HttpGet]
         public ActionResult HuyDonHang(int? id)
         {

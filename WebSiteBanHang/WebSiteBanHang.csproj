@@ -2158,6 +2158,8 @@
     <Content Include="Views\Quyen\XoaQuyen.cshtml" />
     <Content Include="Views\PhanQuyen\Index.cshtml" />
     <Content Include="Views\PhanQuyen\PhanQuyen.cshtml" />
+    <Content Include="Views\PhanQuyen\ThemMember.cshtml" />
+    <Content Include="Views\PhanQuyen\XoaMember.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

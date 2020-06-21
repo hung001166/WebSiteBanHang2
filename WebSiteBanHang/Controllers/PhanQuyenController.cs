@@ -15,7 +15,7 @@ namespace WebSiteBanHang.Controllers
         // GET: PhanQuyen
         public ActionResult Index()
         {
-            return View(db.LoaiThanhViens.OrderByDescending(n => n.MaLoaiTV));
+            return View(db.LoaiThanhViens.Where(n => n.UuDai == 1).OrderByDescending(n => n.MaLoaiTV));
         }
 
         [HttpGet]
@@ -63,5 +63,55 @@ namespace WebSiteBanHang.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public ActionResult ThemMember()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemMember(LoaiThanhVien loaiTV)
+        {
+            if (ModelState.IsValid)
+            {
+                db.LoaiThanhViens.Add(loaiTV);
+                loaiTV.UuDai = 1;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
+        public ActionResult XoaMember(int? id)
+        {
+            //Lấy quyền cần chỉnh sửa dựa vào id
+            if (id == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            LoaiThanhVien q = db.LoaiThanhViens.SingleOrDefault(n => n.MaLoaiTV == id);
+            if (q == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(q);
+        }
+
+        [HttpPost]
+        public ActionResult XoaMember(LoaiThanhVien model)
+        {
+
+            db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            model.UuDai = 0;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }
